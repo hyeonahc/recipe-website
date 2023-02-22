@@ -5,5 +5,14 @@ export const requestApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_URL,
   }),
-  endpoints: builder => ({}),
+  endpoints: builder => ({
+    searchRecipe: builder.mutation({
+      query: keyword => ({
+        url: `/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${keyword}`,
+        method: 'GET',
+      }),
+    }),
+  }),
 })
+
+export const { useSearchRecipeMutation } = requestApi
