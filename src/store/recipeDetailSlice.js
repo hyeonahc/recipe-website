@@ -2,14 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const recipeDetailSlice = createSlice({
   name: 'recipeDetailSlice',
-  initialState: {
-    title: '',
-    image: '',
-    dairyFree: null,
-    diets: '',
-    ingredients: [],
-    instructions: [],
-  },
+  initialState: {},
   reducers: {
     getRecipeDetail: (state, action) => {
       return { ...action.payload }
