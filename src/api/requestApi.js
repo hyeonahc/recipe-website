@@ -12,7 +12,14 @@ export const requestApi = createApi({
         method: 'GET',
       }),
     }),
+    getRecipeInformation: builder.mutation({
+      query: id => ({
+        url: `/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
-export const { useSearchRecipeMutation } = requestApi
+export const { useSearchRecipeMutation, useGetRecipeInformationMutation } =
+  requestApi
