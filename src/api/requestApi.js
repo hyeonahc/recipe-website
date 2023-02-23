@@ -7,8 +7,8 @@ export const requestApi = createApi({
   }),
   endpoints: builder => ({
     searchRecipe: builder.mutation({
-      query: keyword => ({
-        url: `/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${keyword}`,
+      query: ({ keyword, offset }) => ({
+        url: `/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${keyword}&offset=${offset}&number=5`,
         method: 'GET',
       }),
     }),
