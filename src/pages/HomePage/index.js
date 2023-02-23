@@ -4,13 +4,14 @@ import {
   FormControl,
   OutlinedInput,
   Pagination,
-  Typography,
+  Typography
 } from '@mui/material'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
 import ImageListItemBar from '@mui/material/ImageListItemBar'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { useSearchRecipeMutation } from '../../api/requestApi'
 import { addRecipeItems } from '../../store/recipeItemsSlice'
 import { getTotalResults } from '../../store/totalResultsSlice'
@@ -119,20 +120,22 @@ const HomePage = () => {
               gap={20}>
               {recipeItems.map(item => (
                 <ImageListItem key={item.id}>
-                  <img
-                    src={item.image}
-                    srcSet={item.image}
-                    alt={item.title}
-                    loading='lazy'
-                  />
-                  <ImageListItemBar
-                    title={item.title}
-                    sx={{
-                      '.MuiImageListItemBar-title': {
-                        whiteSpace: 'normal',
-                      },
-                    }}
-                  />
+                  <Link to={`/recipedetail/${item.id}`}>
+                    <img
+                      src={item.image}
+                      srcSet={item.image}
+                      alt={item.title}
+                      loading='lazy'
+                    />
+                    <ImageListItemBar
+                      title={item.title}
+                      sx={{
+                        '.MuiImageListItemBar-title': {
+                          whiteSpace: 'normal',
+                        },
+                      }}
+                    />
+                  </Link>
                 </ImageListItem>
               ))}
             </ImageList>
