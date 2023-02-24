@@ -28,17 +28,36 @@ const Main = () => {
         <Grid
           container
           sx={{
-            height: '60vh',
+            height: {
+              xs: 'unset',
+              sm: '60vh',
+            },
             alignItems: 'center',
+            alignContent: {
+              xs: 'center',
+              sm: 'unset',
+            },
+            padding: {
+              xs: '10rem 0',
+              sm: 0,
+            },
           }}>
           <Grid
             item
-            xs={6}>
+            xs={12}
+            sm={6}>
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                width: {
+                  xs: '15rem',
+                  sm: '100%',
+                },
+                margin: {
+                  xs: '0 auto',
+                },
               }}>
               <img
                 src='https://user-images.githubusercontent.com/83247825/221052155-06f40bb4-e115-44e6-b496-32468528a063.png'
@@ -54,11 +73,20 @@ const Main = () => {
           </Grid>
           <Grid
             item
-            xs={6}>
-            <Box>
+            xs={12}
+            sm={6}>
+            <Box
+              sx={{
+                textAlign: {
+                  xs: 'center',
+                },
+              }}>
               <Typography
                 sx={{
-                  fontSize: '5rem',
+                  fontSize: {
+                    xs: '3rem',
+                    sm: '5rem',
+                  },
                   fontWeight: 'bold',
                   lineHeight: '1.2',
                   marginBottom: '0.25em',
@@ -67,7 +95,14 @@ const Main = () => {
                 <br />
                 Recipe World
               </Typography>
-              <Typography sx={{ fontSize: '2rem', fontWeight: 'light' }}>
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: '1.8rem',
+                    sm: '2rem',
+                  },
+                  fontWeight: 'light',
+                }}>
                 Making healthier food choices is key
                 <br />
                 to a heart-healthy lifestyle
@@ -81,20 +116,40 @@ const Main = () => {
           <Grid
             container
             sx={{
-              height: '30vh',
+              height: {
+                xs: 'unset',
+                sm: '30vh',
+              },
               alignItems: 'center',
+              padding: {
+                xs: '3rem 0',
+                sm: 0,
+              },
             }}>
             {serviceCopy.map((copy, index) => (
               <Grid
                 item
-                xs={4}
+                xs={12}
+                sm={4}
                 key={index}
-                sx={{ padding: '0 1rem' }}>
+                sx={{
+                  padding: '0 1rem',
+                  marginBottom: {
+                    xs: serviceCopy.length - 1 !== index && '3rem',
+                    sm: 0,
+                  },
+                }}>
                 <Typography
                   sx={{
-                    fontSize: '2.5rem',
+                    fontSize: {
+                      xs: '1.8rem',
+                      sm: '2.5rem',
+                    },
                     fontWeight: 'light',
-                    marginBottom: '1rem',
+                    marginBottom: {
+                      xs: '0.5rem',
+                      sm: '1rem',
+                    },
                   }}>
                   {copy.title}
                 </Typography>

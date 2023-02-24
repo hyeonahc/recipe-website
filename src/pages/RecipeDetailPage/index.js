@@ -13,21 +13,25 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useGetRecipeInformationMutation } from '../../api/requestApi'
-import { getRecipeDetail } from '../../store/recipeDetailSlice'
+import {
+  getRecipeDetail,
+  resetRecipeDetail,
+} from '../../store/recipeDetailSlice'
 
 const RecipeDetailPage = () => {
   const [getRecipeInformation] = useGetRecipeInformationMutation()
 
   const dispatch = useDispatch()
   const params = useParams()
+  const { id } = params
 
   const recipeDetail = useSelector(state => {
     return state.recipeDetail
   })
 
   const requestRecipeDetail = async () => {
+    dispatch(resetRecipeDetail())
     try {
-      const { id } = params
       const res = await getRecipeInformation(id)
       const { title, image, diets, extendedIngredients, analyzedInstructions } =
         res.data
@@ -58,16 +62,18 @@ const RecipeDetailPage = () => {
 
   useEffect(() => {
     requestRecipeDetail()
-  })
+  }, [id])
 
   return (
     <Container maxWidth='lg'>
       <Box sx={{ padding: '5rem 0' }}>
-        {Object.keys(recipeDetail).length && (
+        {Object.keys(recipeDetail).length ? (
           <Grid container>
             <Grid
               item
-              xs={4}>
+              xs={12}
+              sm={5}
+              md={4}>
               <img
                 src={recipeDetail.image}
                 alt={recipeDetail.title}
@@ -77,10 +83,14 @@ const RecipeDetailPage = () => {
             </Grid>
             <Grid
               item
-              xs={1}></Grid>
+              xs={0}
+              sm={1}
+              md={1}></Grid>
             <Grid
               item
-              xs={7}>
+              xs={12}
+              sm={6}
+              md={7}>
               <Typography
                 sx={{
                   fontSize: '2.5rem',
@@ -91,19 +101,20 @@ const RecipeDetailPage = () => {
               </Typography>
               <Box
                 sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <Stack
-                  direction='row'
-                  spacing={1}
-                  alignItems='center'>
-                  {recipeDetail.diets.length &&
-                    recipeDetail.diets.map((item, index) => (
+                {recipeDetail.diets.length ? (
+                  <Stack
+                    direction='row'
+                    spacing={1}
+                    alignItems='center'>
+                    {recipeDetail.diets.map((item, index) => (
                       <Chip
                         label={item}
                         key={index}
                         color='secondary'
                       />
                     ))}
-                </Stack>
+                  </Stack>
+                ) : null}
                 <Box>
                   <Typography
                     sx={{
@@ -168,7 +179,7 @@ const RecipeDetailPage = () => {
               </Box>
             </Grid>
           </Grid>
-        )}
+        ) : null}
       </Box>
     </Container>
   )

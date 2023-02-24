@@ -3,6 +3,7 @@ import { Container } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useSearchRecipeMutation } from '../../api/requestApi'
+import { resetRecipeDetail } from '../../store/recipeDetailSlice'
 import { addRecipeItems, resetRecipeItems } from '../../store/recipeItemsSlice'
 import { addSearchWord, resetSearchWord } from '../../store/searchWordSlice'
 import {
@@ -25,6 +26,7 @@ const Nav = () => {
     dispatch(resetSearchWord())
     dispatch(resetRecipeItems())
     dispatch(resetTotalResults())
+    dispatch(resetRecipeDetail())
   }
 
   const getInputValue = e => {
@@ -54,10 +56,19 @@ const Nav = () => {
   return (
     <Box sx={{ backgroundColor: '#2079ad' }}>
       <Container maxWidth='lg'>
-        <Grid container>
+        <Grid
+          container
+          sx={{
+            padding: {
+              xs: '1.6rem 0',
+              sm: '0',
+            },
+          }}>
           <Grid
             item
-            xs={2}
+            xs={12}
+            sm={3}
+            md={2}
             sx={{
               height: '10vh',
               display: 'flex',
@@ -65,7 +76,14 @@ const Nav = () => {
             }}>
             <Box
               sx={{
-                padding: '2rem',
+                padding: {
+                  xs: 0,
+                  sm: '2rem',
+                },
+                maxWidth: '12rem',
+                margin: {
+                  xs: '0 auto',
+                },
                 '&:hover': {
                   cursor: 'pointer',
                 },
@@ -84,7 +102,9 @@ const Nav = () => {
           </Grid>
           <Grid
             item
-            xs={10}
+            xs={12}
+            sm={9}
+            md={10}
             sx={{
               display: 'flex',
               alignItems: 'center',

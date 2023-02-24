@@ -12,7 +12,10 @@ const HomePage = () => {
     <>
       <Box
         sx={{
-          height: '90vh',
+          height: {
+            xs: 'unset',
+            sm: '90vh',
+          },
         }}>
         {!totalResults ? <Main /> : <SearchResult />}
       </Box>

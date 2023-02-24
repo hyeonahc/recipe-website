@@ -5,6 +5,7 @@ import {
   ImageListItemBar,
   Pagination,
   Typography,
+  useMediaQuery,
 } from '@mui/material'
 import { Container } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -15,6 +16,9 @@ import { addRecipeItems } from '../../store/recipeItemsSlice'
 import { getTotalResults } from '../../store/totalResultsSlice'
 
 const SearchResult = () => {
+  const matchesXs = useMediaQuery('(min-width:600px)')
+  const matchesSm = useMediaQuery('(min-width:900px)')
+
   const [searchRecipe] = useSearchRecipeMutation()
 
   const dispatch = useDispatch()
@@ -68,7 +72,7 @@ const SearchResult = () => {
           display: 'flex',
           flexDirection: 'column',
         }}>
-        <Typography>
+        <Typography sx={{ marginBottom: '2rem' }}>
           Found{' '}
           <Box
             component='span'
@@ -78,8 +82,18 @@ const SearchResult = () => {
           recipes
         </Typography>
         <ImageList
-          cols={3}
-          gap={20}>
+          cols={matchesXs ? 3 : 1}
+          gap={20}
+          sx={{
+            width: {
+              xs: '31.2rem',
+              sm: 'auto',
+            },
+            margin: {
+              xs: '0 auto',
+              sm: 'auto',
+            },
+          }}>
           {recipeItems.map(item => (
             <ImageListItem key={item.id}>
               <Link to={`/recipedetail/${item.id}`}>

@@ -5,7 +5,10 @@ const Layout = ({ children }) => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        minHeight: {
+          xs: 'unset',
+          sm: '100vh',
+        },
       }}>
       <Nav />
       <Box>{children}</Box>
