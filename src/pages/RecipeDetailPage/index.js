@@ -58,7 +58,7 @@ const RecipeDetailPage = () => {
 
   useEffect(() => {
     requestRecipeDetail()
-  }, [])
+  })
 
   return (
     <Container maxWidth='lg'>
