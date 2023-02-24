@@ -28,7 +28,6 @@ const RecipeDetailPage = () => {
       const res = await getRecipeInformation(id)
       const { title, image, diets, extendedIngredients, analyzedInstructions } =
         res.data
-
       const ingredientsName = extendedIngredients.map(item => {
         return item.name
       })
@@ -80,11 +79,15 @@ const RecipeDetailPage = () => {
             item
             xs={8}
             sx={{ border: '1px solid navy' }}>
-            <Typography>{recipeDetail.title}</Typography>
-            <Box>
-              <Typography>Health Information:</Typography>
-              <Typography>{recipeDetail.diets}</Typography>
-            </Box>
+            <Typography sx={{ fontSize: '2.5rem', marginBottom: '2rem' }}>
+              {recipeDetail.title}
+            </Typography>
+            {recipeDetail.diets.length &&
+              recipeDetail.diets.map((item, index) => (
+                <Box key={index}>
+                  <Box component='span'>{item}</Box>
+                </Box>
+              ))}
             <Box>
               <Typography>Ingredients:</Typography>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.2rem' }}>
