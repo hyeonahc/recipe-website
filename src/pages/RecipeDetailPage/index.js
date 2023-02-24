@@ -58,10 +58,6 @@ const RecipeDetailPage = () => {
     requestRecipeDetail()
   }, [])
 
-  useEffect(() => {
-    console.log(recipeDetail)
-  }, [recipeDetail])
-
   return (
     <Box>
       {Object.keys(recipeDetail).length && (
