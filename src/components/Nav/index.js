@@ -33,6 +33,7 @@ const Nav = () => {
 
   const handleEnterOrClick = e => {
     if (e.key === 'Enter' || e.type === 'click') {
+      navigate('/')
       const offset = 0
       requestSearchRecipe(offset)
     }
@@ -41,7 +42,7 @@ const Nav = () => {
   const requestSearchRecipe = async offset => {
     try {
       const res = await searchRecipe({ searchWord, offset })
-      console.log(res)
+      // console.log(res)
       const { results, totalResults } = res.data
       dispatch(addRecipeItems(results))
       dispatch(getTotalResults(totalResults))
