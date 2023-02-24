@@ -6,15 +6,15 @@ const Main = () => {
   const serviceCopy = [
     {
       title: '🔎 Search it',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at justo mattis, faucibus mi id, tempus dui.',
+      body: 'Do you want to know how to cook your favourite cuisine? Search any cuisine to discover recipes!',
     },
     {
-      title: '💡 Find it',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at justo mattis, faucibus mi id, tempus dui.',
+      title: '💡 Learn it',
+      body: 'We provide health information(vegan, dairy-free and more), a list of ingredients with measurements and the best cooking instruction!',
     },
     {
       title: '🧑‍🍳 Cook it',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at justo mattis, faucibus mi id, tempus dui.',
+      body: "After reading the recipe, it's time to cook now! Enjoy your cooking!",
     },
   ]
 
