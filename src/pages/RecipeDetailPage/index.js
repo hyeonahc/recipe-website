@@ -1,9 +1,11 @@
 import {
   Box,
+  Chip,
   Grid,
   List,
   ListItem,
   ListItemText,
+  Stack,
   Typography,
 } from '@mui/material'
 import { Container } from '@mui/system'
@@ -62,13 +64,10 @@ const RecipeDetailPage = () => {
     <Container maxWidth='lg'>
       <Box sx={{ padding: '5rem 0' }}>
         {Object.keys(recipeDetail).length && (
-          <Grid
-            container
-            sx={{ border: '2px solid salmon' }}>
+          <Grid container>
             <Grid
               item
-              xs={4}
-              sx={{ border: '1px solid green' }}>
+              xs={4}>
               <img
                 src={recipeDetail.image}
                 alt={recipeDetail.title}
@@ -78,49 +77,94 @@ const RecipeDetailPage = () => {
             </Grid>
             <Grid
               item
-              xs={8}
-              sx={{ border: '1px solid navy' }}>
-              <Typography sx={{ fontSize: '2.5rem', marginBottom: '2rem' }}>
+              xs={1}></Grid>
+            <Grid
+              item
+              xs={7}>
+              <Typography
+                sx={{
+                  fontSize: '2.5rem',
+                  fontWeight: 'bolder',
+                  marginBottom: '2rem',
+                }}>
                 {recipeDetail.title}
               </Typography>
-              {recipeDetail.diets.length &&
-                recipeDetail.diets.map((item, index) => (
-                  <Box key={index}>
-                    <Box component='span'>{item}</Box>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                <Stack
+                  direction='row'
+                  spacing={1}
+                  alignItems='center'>
+                  {recipeDetail.diets.length &&
+                    recipeDetail.diets.map((item, index) => (
+                      <Chip
+                        label={item}
+                        key={index}
+                        color='secondary'
+                      />
+                    ))}
+                </Stack>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: '2rem',
+                      fontWeight: 'bold',
+                      marginBottom: '1rem',
+                    }}>
+                    Ingredients
+                  </Typography>
+                  <Box
+                    sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.2rem' }}>
+                    {recipeDetail.ingredients.map((item, index) => (
+                      <Box
+                        key={index}
+                        sx={{ fontWeight: 'light' }}>
+                        <Box component='span'>{item[0]}</Box>
+                        <Box component='span'> {item[1].amount}</Box>
+                        <Box component='span'>
+                          {item[1].unitShort && ` ${item[1].unitShort}`}
+                        </Box>
+                        <Box component='span'>
+                          {recipeDetail.ingredients.length - 1 !== index && ','}
+                        </Box>
+                      </Box>
+                    ))}
                   </Box>
-                ))}
-              <Box>
-                <Typography>Ingredients:</Typography>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.2rem' }}>
-                  {recipeDetail.ingredients.map((item, index) => (
-                    <Box key={index}>
-                      <Box component='span'>{item[0]}</Box>
-                      <Box component='span'> {item[1].amount}</Box>
-                      <Box component='span'>
-                        {item[1].unitShort && ` ${item[1].unitShort}`}
-                      </Box>
-                      <Box component='span'>
-                        {recipeDetail.ingredients.length - 1 !== index && ','}
-                      </Box>
-                    </Box>
-                  ))}
                 </Box>
-              </Box>
-              <Box>
-                <Typography>Instructions</Typography>
-                <List disablePadding>
-                  {recipeDetail.instructions.map((item, index) => (
-                    <ListItem
-                      disablePadding
-                      key={index}
-                      sx={{ alignItems: 'flex-start', gap: '1rem' }}>
-                      <Typography sx={{ paddingTop: '0.2rem' }}>
-                        {index + 1}
-                      </Typography>
-                      <ListItemText primary={item} />
-                    </ListItem>
-                  ))}
-                </List>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: '2rem',
+                      fontWeight: 'bold',
+                      marginBottom: '1rem',
+                    }}>
+                    Instructions
+                  </Typography>
+                  <List disablePadding>
+                    {recipeDetail.instructions.map((item, index) => (
+                      <ListItem
+                        disablePadding
+                        key={index}
+                        sx={{ alignItems: 'flex-start', gap: '1rem' }}>
+                        <Typography
+                          sx={{
+                            fontSize: '2rem',
+                            color: '#2079ad',
+                            paddingTop: '0.2rem',
+                          }}>
+                          {index + 1}
+                        </Typography>
+                        <ListItemText
+                          primary={
+                            <Typography sx={{ fontWeight: 'light' }}>
+                              {item}
+                            </Typography>
+                          }
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
               </Box>
             </Grid>
           </Grid>
