@@ -16,8 +16,7 @@ import { addRecipeItems } from '../../store/recipeItemsSlice'
 import { getTotalResults } from '../../store/totalResultsSlice'
 
 const SearchResult = () => {
-  const matchesXs = useMediaQuery('(min-width:600px)')
-  const matchesSm = useMediaQuery('(min-width:900px)')
+  const matches = useMediaQuery('(min-width:600px)')
 
   const [searchRecipe] = useSearchRecipeMutation()
 
@@ -82,7 +81,7 @@ const SearchResult = () => {
           recipes
         </Typography>
         <ImageList
-          cols={matchesXs ? 3 : 1}
+          cols={matches ? 3 : 1}
           gap={20}
           sx={{
             width: {
