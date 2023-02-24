@@ -9,9 +9,12 @@ const totalResultsSlice = createSlice({
     getTotalResults: (state, action) => {
       state.totalResults = action.payload
     },
+    resetTotalResults: state => {
+      state.totalResults = 0
+    },
   },
 })
 
 export default totalResultsSlice
 
-export const { getTotalResults } = totalResultsSlice.actions
+export const { getTotalResults, resetTotalResults } = totalResultsSlice.actions

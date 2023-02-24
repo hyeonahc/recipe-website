@@ -7,9 +7,12 @@ const recipeItemsSlice = createSlice({
     addRecipeItems: (state, action) => {
       return [...action.payload]
     },
+    resetRecipeItems: () => {
+      return []
+    },
   },
 })
 
 export default recipeItemsSlice
 
-export const { addRecipeItems } = recipeItemsSlice.actions
+export const { addRecipeItems, resetRecipeItems } = recipeItemsSlice.actions

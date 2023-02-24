@@ -16,8 +16,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useSearchRecipeMutation } from '../../api/requestApi'
 import Main from '../../components/Main'
-import { addRecipeItems } from '../../store/recipeItemsSlice'
-import { getTotalResults } from '../../store/totalResultsSlice'
+import { addRecipeItems, resetRecipeItems } from '../../store/recipeItemsSlice'
+import {
+  getTotalResults,
+  resetTotalResults,
+} from '../../store/totalResultsSlice'
 
 const HomePage = () => {
   const [searchRecipe] = useSearchRecipeMutation()
@@ -36,6 +39,11 @@ const HomePage = () => {
   const [count, setCount] = useState()
   const [page, setPage] = useState(1)
   const PER_PAGE = 5
+
+  const goBackToMain = () => {
+    dispatch(resetRecipeItems())
+    dispatch(resetTotalResults())
+  }
 
   const getInputValue = e => {
     setKeyword(e.target.value)
@@ -86,19 +94,24 @@ const HomePage = () => {
                 display: 'flex',
                 alignItems: 'center',
               }}>
-              <Link to='/'>
-                <Box sx={{ padding: '2rem' }}>
-                  <img
-                    src='https://user-images.githubusercontent.com/83247825/221061838-cfe1822b-e346-4cb0-98ed-6082c85a11b2.png'
-                    alt='logo'
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </Box>
-              </Link>
+              <Box
+                sx={{
+                  padding: '2rem',
+                  '&:hover': {
+                    cursor: 'pointer',
+                  },
+                }}
+                onClick={goBackToMain}>
+                <img
+                  src='https://user-images.githubusercontent.com/83247825/221061838-cfe1822b-e346-4cb0-98ed-6082c85a11b2.png'
+                  alt='logo'
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                  }}
+                />
+              </Box>
             </Grid>
             <Grid
               item
@@ -145,12 +158,18 @@ const HomePage = () => {
           <Container maxWidth='lg'>
             <Box
               sx={{
+                padding: '5rem 0',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
               }}>
               <Typography>
-                Found {totalResults} {keyword} recipes
+                Found{' '}
+                <Box
+                  component='span'
+                  sx={{ color: '#f9a849' }}>
+                  {totalResults.toLocaleString('en-US')}
+                </Box>{' '}
+                recipes
               </Typography>
               <ImageList
                 cols={3}
@@ -188,7 +207,9 @@ const HomePage = () => {
                   page={page}
                   variant='outlined'
                   shape='rounded'
+                  color='secondary'
                   onChange={movePage}
+                  sx={{ marginTop: '3rem' }}
                 />
               </Box>
             </Box>
