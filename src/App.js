@@ -1,24 +1,28 @@
+import { ThemeProvider } from '@mui/material/styles'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import RecipeDetailPage from './pages/RecipeDetailPage'
+import theme from './style/theme'
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route
-          path='/'
-          element={<HomePage />}
-        />
-        <Route path='recipedetail'>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Routes>
           <Route
-            path=':id'
-            element={<RecipeDetailPage />}
+            path='/'
+            element={<HomePage />}
           />
-        </Route>
-      </Routes>
-    </Layout>
+          <Route path='recipedetail'>
+            <Route
+              path=':id'
+              element={<RecipeDetailPage />}
+            />
+          </Route>
+        </Routes>
+      </Layout>
+    </ThemeProvider>
   )
 }
 
